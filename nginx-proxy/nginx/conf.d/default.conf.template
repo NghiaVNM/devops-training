@@ -1,0 +1,14 @@
+server {
+  listen 80 default_server;
+  server_name ${DOMAIN};
+
+  location /healthz {
+    return 200 "ok";
+    add_header Content-Type text/plain;
+    access_log off;
+  }
+
+  location / {
+    return 404;
+  }
+}
