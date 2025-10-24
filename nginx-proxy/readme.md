@@ -7,7 +7,7 @@ docker build -t nginx-proxy:1.0.0 .
 ```
 
 sh ```
-docker run -d --name nginx-proxy -p 80:80 --network app-network --env-file .env nginx-proxy:1.0.0
+docker run -d --name nginx-proxy -p 80:80 -p 443:443 --network app-network --env-file .env nginx-proxy:1.0.0
 ```
 ## 1.2. python-web
 sh ```
