@@ -1,0 +1,67 @@
+services:
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: conbocuoi/devops-training:nginx-proxy-1.0.0
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      -  ./nginx_logs:/var/log/nginx/
+    env_file: .env
+    depends_on:
+      - python-web
+      - golang-web
+      - java-web
+      - nodejs-web
+      - php-web
+      - ruby-web
+    networks: 
+      - nginx-proxy-network
+
+  python-web:
+    container_name: python-web
+    image: conbocuoi/devops-training:python-web-1.0.0
+    build: ./python-web
+    networks: 
+      - nginx-proxy-network
+
+  golang-web:
+    container_name: golang-web
+    image: conbocuoi/devops-training:golang-web-1.0.0
+    build: ./golang-web
+    networks: 
+     - nginx-proxy-network
+  
+  java-web:
+    container_name: java-web
+    image: conbocuoi/devops-training:java-web-1.0.0
+    build: ./java-web
+    networks: 
+     - nginx-proxy-network
+
+  nodejs-web:
+    container_name: nodejs-web
+    image: conbocuoi/devops-training:nodejs-web-1.0.0
+    build: ./nodejs-web
+    networks: 
+     - nginx-proxy-network
+  
+  php-web:
+    container_name: php-web
+    image: conbocuoi/devops-training:php-web-1.0.0
+    build: ./php-web
+    networks: 
+     - nginx-proxy-network
+
+  ruby-web:
+    container_name: ruby-web
+    image: conbocuoi/devops-training:ruby-web-1.0.0
+    build: ./ruby-web
+    networks: 
+     - nginx-proxy-network
+
+networks:
+  nginx-proxy-network:
+    name: nginx-proxy-network
+    driver: bridge
